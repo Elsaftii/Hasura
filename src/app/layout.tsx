@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SideBar from "../components/Sidebar/sideBar";
+import { Box } from "@mui/material";
+import { StoreProvider } from "@/store/StoreProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <StoreProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+
+      <body className={inter.className}>
+        <SideBar />
+        <Box sx={{ paddingLeft: '280px',backgroundColor: '#f8fafb' ,minHeight:'100vh', paddingTop:'10px'}}>
+        {children}
+        <Toaster/>
+        </Box>
+       </body>
     </html>
+    </StoreProvider>
   );
 }
